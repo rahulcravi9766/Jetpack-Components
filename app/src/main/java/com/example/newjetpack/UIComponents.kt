@@ -109,7 +109,7 @@ class UIComponents : ComponentActivity() {
     }
 
     @Composable
-    fun MyScreen() {
+    fun Buttons() {
         var textCount by remember { mutableStateOf(0) }
 
         Text(text = textCount.toString(), fontSize = 50.sp)

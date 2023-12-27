@@ -55,6 +55,12 @@ fun NavigationDrawer(){
         ),
         NavigationItems(
             title = "NavigationBars"
+        ),
+        NavigationItems(
+            title = "Cards"
+        ),
+        NavigationItems(
+            title = "Buttons"
         )
     )
 
@@ -111,6 +117,8 @@ fun NavigationDrawer(){
                 "BottomSheet" -> BottomSheetScaffold()
                 "AppBars" -> CenterAlignedAppBar()
                 "NavigationBars" -> NavigationBars()
+                "Cards" -> SimpleCards()
+                "Buttons" -> Buttons()
             }
 
         }
