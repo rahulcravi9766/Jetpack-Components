@@ -1,21 +1,33 @@
-package com.example.newjetpack.data
+package com.example.newjetpack.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.DateRange
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,18 +38,23 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import androidx.compose.ui.res.painterResource
+import com.example.newjetpack.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -220,7 +237,8 @@ fun MediumAppBar() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LargeAppBar() {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val scrollBehavior =
+        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -272,6 +290,65 @@ fun LargeAppBar() {
                             .fillMaxWidth()
                             .align(CenterHorizontally)
                     )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomAppBars() {
+    var showImage by remember {
+        mutableStateOf(false)
+    }
+    Scaffold(
+
+        bottomBar = {
+            BottomAppBar(
+                actions = {
+                    IconButton(onClick = {
+                        showImage = true
+                    }) {
+                        Icon(Icons.Outlined.Home, contentDescription = "Home")
+                    }
+                    IconButton(onClick = {
+                        showImage = false
+                    }) {
+                        Icon(Icons.Outlined.AccountBox, contentDescription = "AccountBox")
+                    }
+                    IconButton(onClick = { }) {
+                        Icon(Icons.Outlined.ShoppingCart, contentDescription = "ShoppingCart")
+                    }
+                },
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {},
+                        containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
+                        elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
+                    ) {
+                        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
+                    }
+                }
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .background(color = Color.Yellow)
+                .padding(20.dp)
+                .background(color = Color.Green),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = CenterHorizontally
+        ) {
+            Box(modifier = Modifier
+                .size(200.dp)
+                .background(color = Color.White),
+                contentAlignment = Center) {
+                if (showImage){
+                    Image(painter = painterResource(R.drawable.rank_three_badge), contentDescription = "image")
                 }
             }
         }
