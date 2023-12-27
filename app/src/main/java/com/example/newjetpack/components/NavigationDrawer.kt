@@ -48,20 +48,13 @@ fun NavigationDrawer(){
 
     val items = listOf(
         NavigationItems(
-            title = "Account",
-            selectedIcon = Icons.Filled.AccountCircle,
-            unselectedIcon = Icons.Outlined.AccountCircle
+            title = "BottomSheet"
         ),
         NavigationItems(
-            title = "Settings",
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings
+            title = "AppBars"
         ),
         NavigationItems(
-            title = "Notifications",
-            selectedIcon = Icons.Filled.Notifications,
-            unselectedIcon = Icons.Outlined.Notifications,
-            badgeCount = 10
+            title = "NavigationBars"
         )
     )
 
@@ -69,6 +62,9 @@ fun NavigationDrawer(){
     val scope = rememberCoroutineScope()
     var selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
+    }
+    var selectedItemTitle by rememberSaveable {
+        mutableStateOf("BottomSheet")
     }
 
     ModalNavigationDrawer(
@@ -80,19 +76,20 @@ fun NavigationDrawer(){
                         label = { Text(text = item.title) },
                         selected = index == selectedItemIndex,
                         onClick = {
+                            selectedItemTitle = item.title
                             selectedItemIndex = index
                             scope.launch {
                                 drawerState.close()
                             }
                         },
-                        icon = {
-                            Icon(
-                                imageVector = if (index == selectedItemIndex) {
-                                    item.selectedIcon
-                                } else item.unselectedIcon,
-                                contentDescription = item.title
-                            )
-                        },
+//                        icon = {
+//                            Icon(
+//                                imageVector = if (index == selectedItemIndex) {
+//                                    item.selectedIcon
+//                                } else item.unselectedIcon,
+//                                contentDescription = item.title
+//                            )
+//                        },
                         badge = {
                             item.badgeCount?.let {
                                 Text(text = item.badgeCount.toString())
@@ -110,6 +107,12 @@ fun NavigationDrawer(){
                 TopAppBarOne(scope, drawerState)
             }) {
             it
+            when(selectedItemTitle){
+                "BottomSheet" -> BottomSheetScaffold()
+                "AppBars" -> CenterAlignedAppBar()
+                "NavigationBars" -> NavigationBars()
+            }
+
         }
     }
 }

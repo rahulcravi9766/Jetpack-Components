@@ -60,7 +60,7 @@ import com.example.newjetpack.R
 @Composable
 fun TopAppBarOne(scope: CoroutineScope, drawerState: DrawerState) {
     TopAppBar(
-        title = { Text("Navigation Drawer") },
+        title = { Text("Jetpack Components") },
         navigationIcon = {
             IconButton(onClick = { scope.launch { drawerState.open() } }) {
                 Icon(Icons.Filled.Menu, contentDescription = "Menu")

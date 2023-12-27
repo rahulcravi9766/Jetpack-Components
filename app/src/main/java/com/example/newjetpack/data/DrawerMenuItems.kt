@@ -11,7 +11,7 @@ data class DrawerMenuItems(
 
 data class NavigationItems(
     val title: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
+    val selectedIcon: ImageVector? = null,
+    val unselectedIcon: ImageVector? = null,
     val badgeCount: Int? = null
 )
