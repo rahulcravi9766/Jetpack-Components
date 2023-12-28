@@ -1,5 +1,8 @@
 package com.example.newjetpack.components
 
+import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -9,13 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,9 +38,9 @@ import com.example.newjetpack.data.NavigationItems
 import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NavigationDrawer(){
+fun NavigationDrawer(context: Context){
 
     val items = listOf(
         NavigationItems(
@@ -61,6 +57,9 @@ fun NavigationDrawer(){
         ),
         NavigationItems(
             title = "Buttons"
+        ),
+        NavigationItems(
+            title = "DatePicker"
         )
     )
 
@@ -115,10 +114,11 @@ fun NavigationDrawer(){
             it
             when(selectedItemTitle){
                 "BottomSheet" -> BottomSheetScaffold()
-                "AppBars" -> CenterAlignedAppBar()
+                "AppBars" -> MediumAppBar()
                 "NavigationBars" -> NavigationBars()
                 "Cards" -> SimpleCards()
                 "Buttons" -> Buttons()
+                "DatePicker" -> DatePickers(context)
             }
 
         }

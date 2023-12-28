@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NewJetpackTheme {
-                NavigationDrawer()
+                NavigationDrawer(this)
             }
         }
     }
