@@ -60,6 +60,9 @@ fun NavigationDrawer(context: Context){
         ),
         NavigationItems(
             title = "DatePicker"
+        ),
+        NavigationItems(
+            title = "DialogBoxes"
         )
     )
 
@@ -69,7 +72,7 @@ fun NavigationDrawer(context: Context){
         mutableStateOf(0)
     }
     var selectedItemTitle by rememberSaveable {
-        mutableStateOf("BottomSheet")
+        mutableStateOf("DialogBoxes")
     }
 
     ModalNavigationDrawer(
@@ -119,6 +122,7 @@ fun NavigationDrawer(context: Context){
                 "Cards" -> SimpleCards()
                 "Buttons" -> Buttons()
                 "DatePicker" -> DatePickers(context)
+                "DialogBoxes" -> DialogBox()
             }
 
         }
